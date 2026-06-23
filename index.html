@@ -12,8 +12,9 @@
             --secondary-text: #86868b;
             --border-color: #f5f5f7;
             --accent-color: #0071e3;
-            --btn-bg: #f5f5f7;
-            --btn-text: #1d1d1f;
+            --tab-bg: #f5f5f7;
+            --tab-active-bg: #000000;
+            --tab-active-text: #ffffff;
         }
 
         /* 自动适配系统深色模式 */
@@ -24,8 +25,9 @@
                 --secondary-text: #86868b;
                 --border-color: #1d1d1f;
                 --accent-color: #2997ff;
-                --btn-bg: #1d1d1f;
-                --btn-text: #f5f5f7;
+                --tab-bg: #1d1d1f;
+                --tab-active-bg: #ffffff;
+                --tab-active-text: #000000;
             }
         }
 
@@ -36,48 +38,58 @@
             color: var(--text-color);
             max-width: 680px;
             margin: 0 auto;
-            padding: 60px 20px 40px 20px; /* 顶部留出按钮空间 */
+            padding: 40px 20px;
             -webkit-font-smoothing: antialiased;
-            position: relative;
         }
 
-        /* 右上角中英切换按钮样式 */
-        .lang-switch-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: var(--btn-bg);
-            color: var(--btn-text);
-            border: 1px solid var(--border-color);
-            padding: 6px 14px;
-            border-radius: 15px;
-            font-size: 13px;
+        /* 顶部语言切换标签栏结构 */
+        .tabs-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            background-color: var(--tab-bg);
+            color: var(--text-color);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
             font-weight: 500;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             transition: all 0.2s ease;
-            z-index: 1000;
+            opacity: 0.4; /* 未选中状态：自动变灰 */
         }
 
-        .lang-switch-btn:hover {
+        /* 选中高亮状态 */
+        .tab-btn.active {
+            background-color: var(--tab-active-bg);
+            color: var(--tab-active-text);
+            opacity: 1; /* 选中状态：完全变亮 */
+            font-weight: 600;
+        }
+
+        .tab-btn:hover {
             opacity: 0.8;
-            transform: scale(1.02);
+        }
+        .tab-btn.active:hover {
+            opacity: 1;
         }
 
-        /* 语言区块控制：默认隐藏英文 */
+        /* 语言区块控制 */
         .lang-section {
             display: none;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.2s ease;
         }
 
-        /* 默认显示激活的语言 */
         .lang-section.active {
             display: block;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         h1 {
@@ -134,8 +146,13 @@
 </head>
 <body>
 
-    <button class="lang-switch-btn" id="langBtn" onclick="toggleLanguage()">English</button>
+    <!-- 位于标题正上方的语言切换并排按钮 -->
+    <div class="tabs-container">
+        <button class="tab-btn active" id="btn-zh" onclick="switchLang('zh')">中文版</button>
+        <button class="tab-btn" id="btn-en" onclick="switchLang('en')">English</button>
+    </div>
 
+    <!-- 中文版 (Chinese Version) -->
     <div id="lang-zh" class="lang-section active">
         <h1>隐私政策</h1>
         <p class="date">最近更新日期：2026年6月23日</p>
@@ -157,6 +174,7 @@
         <p><strong>电子邮箱：</strong> <a href="mailto:your_email@example.com">your_email@example.com</a></p>
     </div>
 
+    <!-- 英文版 (English Version) -->
     <div id="lang-en" class="lang-section">
         <h1>Privacy Policy</h1>
         <p class="date">Last Updated: June 23, 2026</p>
@@ -178,25 +196,25 @@
         <p><strong>Email:</strong> <a href="mailto:your_email@example.com">your_email@example.com</a></p>
     </div>
 
+    <!-- 标签切换核心逻辑 -->
     <script>
-        function toggleLanguage() {
+        function switchLang(lang) {
             const zhSection = document.getElementById('lang-zh');
             const enSection = document.getElementById('lang-en');
-            const btn = document.getElementById('langBtn');
+            const btnZh = document.getElementById('btn-zh');
+            const btnEn = document.getElementById('btn-en');
 
-            if (zhSection.classList.contains('active')) {
-                // 切换到英文
-                zhSection.classList.remove('active');
-                enSection.classList.add('active');
-                btn.innerText = '中文';
-            } else {
-                // 切换到中文
-                enSection.classList.remove('active');
+            if (lang === 'zh') {
                 zhSection.classList.add('active');
-                btn.innerText = 'English';
+                enSection.classList.remove('active');
+                btnZh.classList.add('active');
+                btnEn.classList.remove('active');
+            } else {
+                enSection.classList.add('active');
+                zhSection.classList.remove('active');
+                btnEn.classList.add('active');
+                btnZh.classList.remove('active');
             }
-            // 切换后自动置顶页面
-            window.scrollTo(0, 0);
         }
     </script>
 
