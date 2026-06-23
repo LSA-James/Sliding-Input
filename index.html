@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 1. 修改了浏览器标签标题，同时包含隐私和支持 -->
-    <title>隐私政策与技术支持 / Privacy Policy & Support</title>
+    <title>Privacy Policy & Support / 隐私政策与技术支持</title>
     <style>
         /* 苹果原生极简设计风格 */
         :root {
@@ -43,6 +42,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* 顶部语言切换标签栏结构 */
         .tabs-container {
             display: flex;
             gap: 8px;
@@ -59,20 +59,25 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease;
-            opacity: 0.4;
+            opacity: 0.4; /* 未选中状态：自动变灰 */
         }
 
+        /* 选中高亮状态 */
         .tab-btn.active {
             background-color: var(--tab-active-bg);
             color: var(--tab-active-text);
-            opacity: 1;
+            opacity: 1; /* 选中状态：完全变亮 */
             font-weight: 600;
         }
 
         .tab-btn:hover {
             opacity: 0.8;
         }
+        .tab-btn.active:hover {
+            opacity: 1;
+        }
 
+        /* 语言区块控制 */
         .lang-section {
             display: none;
             animation: fadeIn 0.2s ease;
@@ -142,36 +147,11 @@
 <body>
 
     <div class="tabs-container">
-        <button class="tab-btn active" id="btn-zh" onclick="switchLang('zh')">中文版</button>
-        <button class="tab-btn" id="btn-en" onclick="switchLang('en')">English</button>
+        <button class="tab-btn" id="btn-zh" onclick="switchLang('zh')">中文版</button>
+        <button class="tab-btn active" id="btn-en" onclick="switchLang('en')">English</button>
     </div>
 
-    <!-- 中文版 (Chinese Version) -->
-    <div id="lang-zh" class="lang-section active">
-        <!-- 2. 修改了主标题 -->
-        <h1>隐私政策与技术支持</h1>
-        <p class="date">最近更新日期：2026年6月23日</p>
-
-        <p>本应用（以下简称“本App”）是一款完全离线的独立应用。我们非常重视用户的隐私保护并为您提供必要的技术支持，特此制定本政策。</p>
-
-        <h2>1. 数据收集与使用</h2>
-        <ul>
-            <li><strong>完全离线：</strong> 本App在运行过程中<strong>不需要联网</strong>，也不具备任何网络传输功能。</li>
-            <li><strong>零数据收集：</strong> 我们<strong>不收集、不存储、不记录、不上传</strong>用户的任何个人信息、设备信息、地理位置或任何行为数据。</li>
-            <li><strong>本地存储：</strong> 您在使用本App时产生的的所有数据 and 配置，均仅加密或直接保存在您自己的本地设备上。一旦卸载App，相关本地数据将被完全清除。</li>
-        </ul>
-
-        <h2>2. 数据共享与披露</h2>
-        <p>由于我们不收集、不接触任何用户数据，因此<strong>绝对不存在</strong>将用户数据共享、出租、出售或披露给任何第三方机构或个人的情况。</p>
-
-        <h2>3. 技术支持与联系我们</h2>
-        <p>如果您在使用本App时遇到任何闪退、Bug、使用疑问或有任何建议，欢迎随时通过以下电子邮箱与开发者取得联系，我们将为您提供协助：</p>
-        <p><strong>电子邮箱：</strong> <a href="mailto:yiyi32955@icloud.com">yiyi32955@icloud.com</a></p>
-    </div>
-
-    <!-- 英文版 (English Version) -->
-    <div id="lang-en" class="lang-section">
-        <!-- 3. 修改了英文主标题 -->
+    <div id="lang-en" class="lang-section active">
         <h1>Privacy Policy & Support</h1>
         <p class="date">Last Updated: June 23, 2026</p>
 
@@ -190,6 +170,27 @@
         <h2>3. Technical Support & Contact Us</h2>
         <p>If you encounter any crashes, bugs, usage questions, or have any suggestions while using this App, please feel free to contact the developer via email. We will provide you with assistance:</p>
         <p><strong>Email:</strong> <a href="mailto:yiyi32955@icloud.com">yiyi32955@icloud.com</a></p>
+    </div>
+
+    <div id="lang-zh" class="lang-section">
+        <h1>隐私政策与技术支持</h1>
+        <p class="date">最近更新日期：2026年6月23日</p>
+
+        <p>本应用（以下简称“本App”）是一款完全离线的独立应用。我们非常重视用户的隐私保护并为您提供必要的技术支持，特此制定本政策。</p>
+
+        <h2>1. 数据收集与使用</h2>
+        <ul>
+            <li><strong>完全离线：</strong> 本App在运行过程中<strong>不需要联网</strong>，也不具备任何网络传输功能。</li>
+            <li><strong>零数据收集：</strong> 我们<strong>不收集、不存储、不记录、不上传</strong>用户的任何个人信息、设备信息、地理位置或任何行为数据。</li>
+            <li><strong>本地存储：</strong> 您在使用本App时产生的的所有数据和配置，均仅加密或直接保存在您自己的本地设备上。一旦卸载App，相关本地数据将被完全清除。</li>
+        </ul>
+
+        <h2>2. 数据共享与披露</h2>
+        <p>由于我们不收集、不接触任何用户数据，因此<strong>绝对不存在</strong>将用户数据共享、出租、出售或披露给任何第三方机构或个人的情况。</p>
+
+        <h2>3. 技术支持与联系我们</h2>
+        <p>如果您在使用本App时遇到任何闪退、Bug、使用疑问或有任何建议，欢迎随时通过以下电子邮箱与开发者取得联系，我们将为您提供协助：</p>
+        <p><strong>电子邮箱：</strong> <a href="mailto:yiyi32955@icloud.com">yiyi32955@icloud.com</a></p>
     </div>
 
     <script>
